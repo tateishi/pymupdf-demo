@@ -1,7 +1,6 @@
 from msilib.schema import Directory
 from pathlib import Path
 import io
-# import configparser
 
 
 import fitz
@@ -10,16 +9,19 @@ from PIL import Image
 
 from config import DIRECTORY
 
-FILENAME = 'data1.pdf'
+
+FILENAME = 'data3.pdf'
 PATHNAME = DIRECTORY / FILENAME
 
-doc = fitz.open(PATHNAME)
 
-def extract_image_from_document(doc, xref):
+def extract_image_from_document(doc, xref, rotate=False):
     image_data = doc.extract_image(xref)
     image = Image.open(io.BytesIO(image_data['image']))
-    return image.transpose(Image.Transpose.ROTATE_90)
+    if rotate:
+        image = image.transpose(Image.Transpose.ROTATE_90)
+    return image
 
+doc = fitz.open(PATHNAME)
 
 for i, page in enumerate(doc):
     for j, (xref, *_) in enumerate(page.get_images()):
