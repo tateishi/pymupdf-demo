@@ -9,4 +9,4 @@ def str2bool(s):
         
 DIRECTORY = Path(config_ini['data']['directory']).expanduser()
 FILENAME = Path(config_ini['data']['filename'])
-ROTATE = str2bool(config_ini['data']['rotate'])
+ROTATE = int(config_ini['data']['rotate'])

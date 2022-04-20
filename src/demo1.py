@@ -1,3 +1,4 @@
+from cmath import exp
 from msilib.schema import Directory
 from pathlib import Path
 import io
@@ -10,16 +11,16 @@ from PIL import Image
 from config import DIRECTORY, FILENAME, ROTATE
 
 
-def extract_image_from_document(doc, xref, rotate=False):
+def extract_image_from_document(doc, xref, rotate=0):
     image_data = doc.extract_image(xref)
     with Image.open(io.BytesIO(image_data['image'])) as image:
         image.load()
-        if rotate:
-            image = image.transpose(Image.Transpose.ROTATE_90)
+        if rotate > 0:
+            image = image.rotate(rotate, expand=True)
         return image
 
 
-def save_image_from_document(directory, filename, rotate=False):
+def save_image_from_document(directory, filename, rotate=0):
     directory = directory if isinstance(directory, Path) else Path(directory)
     filename = filename if isinstance(filename, Path) else Path(filename)
     pathname = directory / filename
