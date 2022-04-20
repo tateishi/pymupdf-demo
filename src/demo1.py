@@ -12,10 +12,11 @@ from config import DIRECTORY, FILENAME, ROTATE
 
 def extract_image_from_document(doc, xref, rotate=False):
     image_data = doc.extract_image(xref)
-    image = Image.open(io.BytesIO(image_data['image']))
-    if rotate:
-        image = image.transpose(Image.Transpose.ROTATE_90)
-    return image
+    with Image.open(io.BytesIO(image_data['image'])) as image:
+        image.load()
+        if rotate:
+            image = image.transpose(Image.Transpose.ROTATE_90)
+        return image
 
 
 def save_image_from_document(directory, filename, rotate=False):
