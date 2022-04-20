@@ -5,5 +5,9 @@ name = "pypi"
 
 [packages]
 pymupdf = "*"
+pillow = "*"
 
 [dev-packages]
+
+[scripts]
+demo1 = "python src/demo1.py"
