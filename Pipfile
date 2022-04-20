@@ -6,8 +6,10 @@ name = "pypi"
 [packages]
 pymupdf = "*"
 pillow = "*"
+"pdfminer.six" = "*"
 
 [dev-packages]
 
 [scripts]
 demo1 = "python src/demo1.py"
+demo2 = "python src/demo2.py"

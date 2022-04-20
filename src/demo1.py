@@ -1,5 +1,3 @@
-from cmath import exp
-from msilib.schema import Directory
 from pathlib import Path
 import io
 
